@@ -9,8 +9,8 @@ plugins {
 }
 
 group = "my.company"
-version = "1.0.0"
-java.sourceCompatibility = JavaVersion.VERSION_17
+version = "1.0"
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 configurations {
     compileOnly {
@@ -37,7 +37,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
 }
 
@@ -50,16 +50,16 @@ val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
 
 bootJar.enabled = false
 jar.enabled = true
-//
-//java {
-//    withSourcesJar()
-//}
-//
+
+java {
+    withSourcesJar()
+}
+
 publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-            version = "1.0.0"
+            version = "1.0"
         }
     }
 }
