@@ -55,11 +55,11 @@ jar.enabled = true
 //    withSourcesJar()
 //}
 //
-//publishing {
-//    publications {
-//        create<MavenPublication>("maven") {
-//            from(components["java"])
-//            version = "1.0.0"
-//        }
-//    }
-//}
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+            version = "1.0.0"
+        }
+    }
+}
