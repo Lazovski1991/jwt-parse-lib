@@ -45,21 +45,21 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-//val jar: Jar by tasks
-//val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
-//
-//bootJar.enabled = false
-//jar.enabled = true
-//
-//java {
-//    withSourcesJar()
-//}
-//
-//publishing {
-//    publications {
-//        create<MavenPublication>("maven") {
-//            from(components["java"])
-//            version = "1.0.0"
-//        }
-//    }
-//}
+val jar: Jar by tasks
+val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
+
+bootJar.enabled = false
+jar.enabled = true
+
+java {
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+            version = "1.0.0"
+        }
+    }
+}
