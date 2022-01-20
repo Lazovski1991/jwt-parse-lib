@@ -2,7 +2,39 @@
 
 **Подлючение к проекту**
 
-//todo
+Для подключения к проекту необходимо сделать две вещи.
+1. Добавить репозиторий в проект. Пример для maven:
+```
+<repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
+```
+Для gradle:
+```
+allprojects {
+	repositories {
+	...
+	maven { url 'https://jitpack.io' }
+	}
+}
+```
+2. Добавить зависомость. Пример для Maven:
+```
+<dependency>
+	    <groupId>com.github.Lazovski1991</groupId>
+	    <artifactId>jwt-parse-lib</artifactId>
+	    <version>1.0.0-J</version>
+	</dependency>
+```
+Для gradle:
+```
+dependencies {
+	implementation 'com.github.Lazovski1991:jwt-parse-lib:1.0.0-J'
+}
+```
 
 **Как пользоваться?**
 
