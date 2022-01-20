@@ -26,13 +26,13 @@ allprojects {
 <dependency>
 	    <groupId>com.github.Lazovski1991</groupId>
 	    <artifactId>jwt-parse-lib</artifactId>
-	    <version>1.0.0-J</version>
+	    <version>1.0.0-T</version>
 	</dependency>
 ```
 Для gradle:
 ```
 dependencies {
-	implementation 'com.github.Lazovski1991:jwt-parse-lib:1.0.0-J'
+	implementation 'com.github.Lazovski1991:jwt-parse-lib:1.0.0-T'
 }
 ```
 
