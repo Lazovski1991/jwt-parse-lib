@@ -9,8 +9,8 @@ plugins {
 }
 
 group = "my.company"
-version = "1.0.0-J"
-java.sourceCompatibility = JavaVersion.VERSION_17
+version = "1.0-beta2"
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 configurations {
     compileOnly {
@@ -37,7 +37,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
 }
 
@@ -59,7 +59,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-            version = "1.0.0-J"
+            version = "1.0-beta2"
         }
     }
 }
