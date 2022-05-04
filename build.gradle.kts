@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "my.company"
-version = "1.0-beta2"
+version = "1.0-beta3"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 configurations {
@@ -31,7 +31,7 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("javax.xml.bind:jaxb-api:2.4.0-b180830.0359")
     implementation("org.glassfish.jaxb:jaxb-runtime:3.0.2")
-
+    implementation ("org.keycloak:keycloak-core:18.0.0")
 }
 
 tasks.withType<KotlinCompile> {
@@ -59,7 +59,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-            version = "1.0-beta2"
+            version = "1.0-beta3"
         }
     }
 }

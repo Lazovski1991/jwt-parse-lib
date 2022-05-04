@@ -4,21 +4,44 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws
 import io.jsonwebtoken.Jwts
 import my.company.jwtparselib.config.JwtParseProperties
+import org.keycloak.TokenVerifier
+import org.keycloak.representations.AccessToken
 import java.nio.charset.StandardCharsets
 import java.util.*
 
 class ParseTokenUtilServiceImpl constructor(private val properties: JwtParseProperties) : ParseTokenUtilService {
-    override fun getValueFieldFromToken(token: String, field: String): String {
+    override fun getValueFieldFromToken(token: String, field: String, keycloak: Boolean): String {
         if (properties.secretKey.isNullOrEmpty()) {
             throw NullPointerException("Token not maybe null!!!")
         }
-        val jws = getBodyOfToken(token)
-        return jws.body.get(field, String::class.java)
+
+        if (keycloak) {
+           return getInfoFromKeycloakToken(token, field)
+        } else {
+            val jws = getBodyOfToken(token)
+            return jws.body.get(field, String::class.java)
+        }
     }
 
     private fun getBodyOfToken(token: String): Jws<Claims> {
         return Jwts.parser()
-            .setSigningKey(Base64.getEncoder().encodeToString(properties.secretKey!!.toByteArray(StandardCharsets.UTF_8)))
+            .setSigningKey(
+                Base64.getEncoder().encodeToString(properties.secretKey!!.toByteArray(StandardCharsets.UTF_8))
+            )
             .parseClaimsJws(token)
+    }
+
+    private fun getInfoFromKeycloakToken(token: String, fieldName: String): String {
+        val accessTokenTokenVerifier: TokenVerifier<AccessToken> = TokenVerifier.create(token, AccessToken::class.java)
+
+        val accessToken = accessTokenTokenVerifier.token
+        return when (fieldName) {
+            "username" -> accessToken.preferredUsername
+            "userId" -> accessToken.subject
+            "email" -> {
+                return if (accessToken.email != null) accessToken.email else "unknown"
+            }
+            else -> ""
+        }
     }
 }
