@@ -47,6 +47,6 @@ class ParseTokenUtilServiceImpl constructor(private val properties: JwtParseProp
     }
 
     private fun cutToken(token: String): String {
-        return if (token.startsWith("Bearer ")) token.substring(6) else token
+        return if (token.startsWith("Bearer ")) token.substring(7) else token
     }
 }
