@@ -15,11 +15,11 @@ class ParseTokenUtilServiceImpl constructor(private val properties: JwtParseProp
             throw NullPointerException("Token not maybe null!!!")
         }
 
-        if (keycloak) {
-           return getInfoFromKeycloakToken(token, field)
+        return if (keycloak) {
+            getInfoFromKeycloakToken(token, field)
         } else {
             val jws = getBodyOfToken(token)
-            return jws.body.get(field, String::class.java)
+            jws.body.get(field, String::class.java)
         }
     }
 
@@ -32,7 +32,8 @@ class ParseTokenUtilServiceImpl constructor(private val properties: JwtParseProp
     }
 
     private fun getInfoFromKeycloakToken(token: String, fieldName: String): String {
-        val accessTokenTokenVerifier: TokenVerifier<AccessToken> = TokenVerifier.create(token, AccessToken::class.java)
+        val accessTokenTokenVerifier: TokenVerifier<AccessToken> =
+            TokenVerifier.create(cutToken(token), AccessToken::class.java)
 
         val accessToken = accessTokenTokenVerifier.token
         return when (fieldName) {
@@ -43,5 +44,9 @@ class ParseTokenUtilServiceImpl constructor(private val properties: JwtParseProp
             }
             else -> ""
         }
+    }
+
+    private fun cutToken(token: String): String {
+        return if (token.startsWith("Bearer ")) token.substring(6) else token
     }
 }
