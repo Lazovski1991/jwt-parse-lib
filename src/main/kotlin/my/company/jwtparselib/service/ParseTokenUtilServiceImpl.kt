@@ -11,7 +11,7 @@ import java.util.*
 
 class ParseTokenUtilServiceImpl constructor(private val properties: JwtParseProperties) : ParseTokenUtilService {
     override fun getValueFieldFromToken(token: String, field: String, keycloak: Boolean): String {
-        if (properties.secretKey.isNullOrEmpty()) {
+        if (!keycloak && properties.secretKey.isNullOrEmpty()) {
             throw NullPointerException("Token not maybe null!!!")
         }
 
