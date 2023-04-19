@@ -1,1 +1,1 @@
-rootProject.name = "JWT-parse-lib"
+rootProject.name = "jwt-parse-lib"

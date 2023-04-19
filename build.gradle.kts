@@ -1,16 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.4.8"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.10"
-    kotlin("plugin.spring") version "1.6.10"
+    id("org.springframework.boot") version "3.0.5"
+    id("io.spring.dependency-management") version "1.1.0"
+    kotlin("jvm") version "1.8.20"
+    kotlin("plugin.spring") version "1.8.20"
     id ("maven-publish")
 }
 
 group = "my.company"
-version = "2.0.2"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+version = "3.0.0"
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
     compileOnly {
@@ -25,19 +25,19 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    implementation("io.jsonwebtoken:jjwt:0.9.1")
-    implementation("javax.xml.bind:jaxb-api:2.4.0-b180830.0359")
-    implementation("org.glassfish.jaxb:jaxb-runtime:3.0.2")
-    implementation ("org.keycloak:keycloak-core:18.0.0")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
+    implementation("org.glassfish.jaxb:jaxb-runtime:4.0.2")
+    implementation("org.keycloak:keycloak-core:21.0.2")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -59,7 +59,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-            version = "2.0.2"
+            version = "3.0.0"
         }
     }
 }
