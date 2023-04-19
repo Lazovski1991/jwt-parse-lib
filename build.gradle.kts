@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "my.company"
-version = "3.0.2"
+version = "3.0.3"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
@@ -49,7 +49,7 @@ val jar: Jar by tasks
 val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
 
 bootJar.enabled = false
-jar.enabled = false //default true
+jar.enabled = true //default true
 
 java {
     withSourcesJar()
@@ -59,7 +59,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-            version = "3.0.2"
+            version = "3.0.3"
         }
     }
 }
