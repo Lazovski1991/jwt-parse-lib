@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "my.company"
-version = "3.0.3"
+version = "3.0.5"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
@@ -59,7 +59,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-            version = "3.0.3"
+            version = "3.0.5"
         }
     }
 }
